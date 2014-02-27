@@ -1,0 +1,9 @@
+# the  whole output directory
+out/
+
+# Java class files
+*.class
+
+# IDE metadata dirs
+.idea
+*.iml
