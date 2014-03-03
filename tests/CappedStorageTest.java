@@ -69,4 +69,9 @@ public class CappedStorageTest {
         Assert.assertTrue(storage.exists("4"));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testNegativeSize() {
+        new CappedStorage<String, String>(0);
+    }
+
 }
