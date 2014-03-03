@@ -76,8 +76,6 @@ public class Card {
 
     @Override
     public int hashCode() {
-        int result = rank.hashCode();
-        result = 31 * result + suit.hashCode();
-        return result;
+        return 31 * (rank.hashCode() + suit.hashCode());
     }
 }

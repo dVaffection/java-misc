@@ -1,7 +1,6 @@
 package cardsdeck;
 
 import cardsdeck.deck.CardNotFoundException;
-
 import java.util.ArrayList;
 
 public class Deck {
