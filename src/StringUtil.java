@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -98,6 +99,28 @@ public class StringUtil {
         int pos = pos(haystack, needle);
         pos = haystack.length() - needle.length() - pos;
         return pos;
+    }
+
+    public static Integer[] allIndexOf(String str, String instance) {
+        return allIndexOf(str, instance, 0);
+    }
+
+    public static Integer[] allIndexOf(String str, String instance, int fromIndex) {
+        ArrayList<Integer> result = new ArrayList<>();
+
+        int index;
+        while (true) {
+            index = str.indexOf(instance, fromIndex);
+
+            if (-1 == index) {
+                break;
+            } else {
+                result.add(index);
+                fromIndex += index + instance.length();
+            }
+        }
+
+        return result.toArray(new Integer[result.size()]);
     }
 
     public static String strtr(String str, HashMap<String, String> map) {
