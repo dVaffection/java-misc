@@ -1,10 +1,25 @@
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 public class StringUtilTest {
 
     @Test
     public void testPad2Params() {
+        String[] asset = {"equity", "stocks", "gold", "foreign exchange","fixed income", "futures", "options"};
+        List assetList = Arrays.asList(asset);
+
+        assetList.add("new");
+
+        System.out.println(assetList.getClass());
+
+
+
+
         String expected = "java  ";
         String actual = StringUtil.pad("java", 6);
         Assert.assertEquals(expected, actual);
@@ -127,18 +142,18 @@ public class StringUtilTest {
         }
     }
 
-//    @Test
-//    public void testStrtr() {
-//        String str = "hi hello";
-//
-//        HashMap<String, String> pairs = new HashMap<>();
-//        pairs.put("hello", "hi");
-//        pairs.put("hi", "hello");
-//
-//        String expected = "hello hi";
-//        String actual = StringUtil.strtr(str, pairs);
-//        Assert.assertEquals(expected, actual);
-//    }
+    @Ignore
+    public void testStrtr() {
+        String str = "hi hello";
+
+        HashMap<String, String> pairs = new HashMap<>();
+        pairs.put("hello", "hi");
+        pairs.put("hi", "hello");
+
+        String expected = "hello hi";
+        String actual = StringUtil.strtr(str, pairs);
+        Assert.assertEquals(expected, actual);
+    }
 
     @Test
     public void testAllIndexOf() {
