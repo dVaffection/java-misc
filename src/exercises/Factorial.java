@@ -2,7 +2,7 @@ package exercises;
 
 public class Factorial {
 
-    public static int calc(int n) {
+    public static int iterative(int n) {
         if (n < 0) {
             throw new IllegalArgumentException("n must be greater than or equal to 0");
         }
@@ -16,6 +16,18 @@ public class Factorial {
         }
 
         return factorial;
+    }
+
+    public static int recursive(int n) {
+        if (n < 0) {
+            throw new IllegalArgumentException("n must be greater than or equal to 0");
+        }
+
+        if (n == 0) {
+            return 1;
+        }
+
+        return n * recursive(n - 1);
     }
 
 }

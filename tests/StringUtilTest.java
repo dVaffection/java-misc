@@ -10,14 +10,12 @@ public class StringUtilTest {
 
     @Test
     public void testPad2Params() {
-        String[] asset = {"equity", "stocks", "gold", "foreign exchange","fixed income", "futures", "options"};
+        String[] asset = {"equity", "stocks", "gold", "foreign exchange", "fixed income", "futures", "options"};
         List assetList = Arrays.asList(asset);
 
         assetList.add("new");
 
         System.out.println(assetList.getClass());
-
-
 
 
         String expected = "java  ";
@@ -143,6 +141,7 @@ public class StringUtilTest {
     }
 
     @Ignore
+    @Test
     public void testStrtr() {
         String str = "hi hello";
 
@@ -167,6 +166,24 @@ public class StringUtilTest {
         Integer[] actual = StringUtil.allIndexOf(str, instance);
         Assert.assertArrayEquals(expected, actual);
 
+    }
+
+    @Test
+    public void findHashTags() {
+        String str = "@mwop\nNo, it's intended to _educate_ the #Larave1 people on what is a #Fa-ca_de. Landing missed. @Ocramius @JeremyKendall";
+
+        String[] expected = {"Larave1", "Fa-ca_de"};
+        String[] actual = StringUtil.findHashTags(str);
+        Assert.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void findMentioned() {
+        String str = "@mwop\nNo, it's intended to _educate_ the #Larave1 people on what is a #Fa-ca_de. Landing missed. @Ocramius @JeremyKendall";
+
+        String[] expected = {"mwop", "Ocramius", "JeremyKendall"};
+        String[] actual = StringUtil.findMentioned(str);
+        Assert.assertArrayEquals(expected, actual);
     }
 
 }

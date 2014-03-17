@@ -1,6 +1,9 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringUtil {
 
@@ -159,6 +162,49 @@ public class StringUtil {
         }
 
         return str;
+    }
+
+    /**
+     * hashtags starts with '#'
+     */
+    public static String[] findHashTags(String str) {
+        ArrayList<String> matches = new ArrayList<>();
+
+        Pattern pattern = Pattern.compile("#[a-z0-9_\\-]*", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(str);
+
+        while (matcher.find()) {
+            int start = matcher.start() + 1; // exclude first char (#)
+            int end = matcher.end();
+
+            String match = str.substring(start, end);
+            matches.add(match);
+        }
+
+        return Arrays.copyOf(matches.toArray(), matches.size(), String[].class);
+    }
+
+    /**
+     * mentioned starts with '@'
+     */
+    public static String[] findMentioned(String str) {
+        ArrayList<String> matches = new ArrayList<>();
+
+        Pattern pattern = Pattern.compile("@[a-z0-9_\\-]*", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(str);
+
+        while (matcher.find()) {
+            int start = matcher.start() + 1; // exclude first char (#)
+            int end = matcher.end();
+
+            String match = str.substring(start, end);
+            matches.add(match);
+
+            System.out.println(start);
+            System.out.println(end);
+        }
+
+        return Arrays.copyOf(matches.toArray(), matches.size(), String[].class);
     }
 
     enum PadType {
