@@ -199,9 +199,6 @@ public class StringUtil {
 
             String match = str.substring(start, end);
             matches.add(match);
-
-            System.out.println(start);
-            System.out.println(end);
         }
 
         return Arrays.copyOf(matches.toArray(), matches.size(), String[].class);
