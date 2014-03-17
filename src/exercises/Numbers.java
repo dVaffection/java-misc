@@ -63,4 +63,24 @@ public class Numbers {
         return armStrong == number;
     }
 
+    public boolean isBinary(int number) {
+        int digit;
+        while (true) {
+            if (number > 9) {
+                digit = number % 10;
+                number = number / 10;
+            } else {
+                digit = number;
+            }
+
+            if (digit > 1) {
+                return false;
+            }
+
+            if (digit == number) {
+                return true;
+            }
+        }
+    }
+
 }

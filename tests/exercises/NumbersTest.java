@@ -41,4 +41,12 @@ public class NumbersTest {
         Assert.assertTrue(numbers.isArmstrong(153));
         Assert.assertFalse(numbers.isArmstrong(123));
     }
+
+    @Test
+    public void isBinary() {
+
+        Assert.assertTrue(numbers.isBinary(10010));
+        Assert.assertFalse(numbers.isBinary(12));
+        Assert.assertFalse(numbers.isBinary(7));
+    }
 }
