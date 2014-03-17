@@ -1,8 +1,6 @@
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.HashMap;
-
 public class StringUtilTest {
 
     @Test
@@ -129,17 +127,31 @@ public class StringUtilTest {
         }
     }
 
+//    @Test
+//    public void testStrtr() {
+//        String str = "hi hello";
+//
+//        HashMap<String, String> pairs = new HashMap<>();
+//        pairs.put("hello", "hi");
+//        pairs.put("hi", "hello");
+//
+//        String expected = "hello hi";
+//        String actual = StringUtil.strtr(str, pairs);
+//        Assert.assertEquals(expected, actual);
+//    }
+
     @Test
-    public void testStrtr() {
-        String str = "hi hello";
+    public void testAllIndexOf() {
+        String str = "Find the first and last OOP in the whole OOP string.";
+        String instance = "OOP";
 
-        HashMap<String, String> pairs = new HashMap<>();
-        pairs.put("hello", "hi");
-        pairs.put("hi", "hello");
+        Integer[] expected = new Integer[2];
+        expected[0] = 24;
+        expected[1] = 41;
 
-        String expected = "hello hi";
-        String actual = StringUtil.strtr(str, pairs);
-        Assert.assertEquals(expected, actual);
+        Integer[] actual = StringUtil.allIndexOf(str, instance);
+        Assert.assertArrayEquals(expected, actual);
+
     }
 
 }
