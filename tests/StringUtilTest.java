@@ -1,5 +1,8 @@
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
+
+import java.util.HashMap;
 
 public class StringUtilTest {
 
@@ -127,18 +130,19 @@ public class StringUtilTest {
         }
     }
 
-//    @Test
-//    public void testStrtr() {
-//        String str = "hi hello";
-//
-//        HashMap<String, String> pairs = new HashMap<>();
-//        pairs.put("hello", "hi");
-//        pairs.put("hi", "hello");
-//
-//        String expected = "hello hi";
-//        String actual = StringUtil.strtr(str, pairs);
-//        Assert.assertEquals(expected, actual);
-//    }
+    @Ignore
+    @Test
+    public void testStrtr() {
+        String str = "hi hello";
+
+        HashMap<String, String> pairs = new HashMap<>();
+        pairs.put("hello", "hi");
+        pairs.put("hi", "hello");
+
+        String expected = "hello hi";
+        String actual = StringUtil.strtr(str, pairs);
+        Assert.assertEquals(expected, actual);
+    }
 
     @Test
     public void testAllIndexOf() {
