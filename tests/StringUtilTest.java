@@ -158,4 +158,22 @@ public class StringUtilTest {
 
     }
 
+    @Test
+    public void findHashTags() {
+        String str = "@mwop\nNo, it's intended to _educate_ the #Larave1 people on what is a #Fa-ca_de. Landing missed. @Ocramius @JeremyKendall";
+
+        String[] expected = {"Larave1", "Fa-ca_de"};
+        String[] actual = StringUtil.findHashTags(str);
+        Assert.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void findMentioned() {
+        String str = "@mwop\nNo, it's intended to _educate_ the #Larave1 people on what is a #Fa-ca_de. Landing missed. @Ocramius @JeremyKendall";
+
+        String[] expected = {"mwop", "Ocramius", "JeremyKendall"};
+        String[] actual = StringUtil.findMentioned(str);
+        Assert.assertArrayEquals(expected, actual);
+    }
+
 }
