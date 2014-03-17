@@ -62,4 +62,24 @@ public class LRUCacheTest {
         new LRUCache<String, String>(0);
     }
 
+    @Test
+    public void cachePopsJustAsked() {
+        cache.add("1", "one");
+        cache.add("2", "two");
+        cache.add("3", "three");
+
+        try {
+            cache.get("1");
+            cache.add("4", "four");
+
+            // must exist as we've just hit it
+            Assert.assertTrue(cache.exists("1"));
+            Assert.assertTrue(cache.exists("3"));
+            Assert.assertTrue(cache.exists("4"));
+            Assert.assertFalse(cache.exists("2"));
+        } catch (Exception e) {
+            Assert.fail(e.getMessage());
+        }
+    }
+
 }

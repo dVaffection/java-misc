@@ -23,7 +23,13 @@ public class LRUCache<K, V> {
             throw new Exception("Value does not exist by given key: " + key.toString());
         }
 
-        return cache.get(key);
+        V value = cache.get(key);
+
+        // pop it to the top
+        cache.remove(key);
+        add(key, value);
+
+        return value;
     }
 
     public boolean remove(K key) {
