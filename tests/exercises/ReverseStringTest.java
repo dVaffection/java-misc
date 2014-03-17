@@ -1,28 +1,24 @@
 package exercises;
 
 import junit.framework.Assert;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 public class ReverseStringTest {
 
+    @Test
+    public void iterative() throws Exception {
+        String str = "java";
+        String actual = ReverseString.iterative(str);
+        String expected = "avaj";
 
-    @Before
-    public void setUp() throws Exception {
-
-    }
-
-    @After
-    public void tearDown() throws Exception {
-
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void testIteration() throws Exception {
-        String str = "java";
-        String actual = ReverseString.iteration(str);
-        String expected = "avaj";
+    public void recursive() throws Exception {
+        String str = "dv";
+        String actual = ReverseString.recursive(str);
+        String expected = "vd";
 
         Assert.assertEquals(expected, actual);
     }
