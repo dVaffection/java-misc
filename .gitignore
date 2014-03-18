@@ -7,3 +7,4 @@ out/
 # IDE metadata dirs
 .idea
 *.iml
+META-INF/
