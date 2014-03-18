@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class SortingTest {
 
     @Test
-    public void testBubble() {
+    public void bubble() {
         Integer[] actual = {3, 2, 5, 8, 1};
         Integer[] expected = {1, 2, 3, 5, 8};
         Sorting.bubble(actual);
@@ -17,8 +17,24 @@ public class SortingTest {
 
     @Test
     public void shuffle() {
-        Integer[] array = {1, 2, 3};
-        Integer[] shuffled = Sorting.shuffle(array);
-        Assert.assertFalse(Arrays.equals(array, shuffled));
+        Integer[] shuffled = {1, 2, 3};
+        Integer[] sorted = Arrays.copyOf(shuffled, shuffled.length);
+        Sorting.shuffle(shuffled);
+        Assert.assertFalse(Arrays.equals(sorted, shuffled));
+    }
+
+    @Test
+    public void isSorted() {
+        Assert.assertTrue(Sorting.isSorted(new Integer[]{}));
+        Assert.assertTrue(Sorting.isSorted(new Integer[]{2}));
+        Assert.assertTrue(Sorting.isSorted(new Integer[]{1, 2, 5, 8, 9}));
+    }
+
+    @Test
+    public void bogo() {
+        Integer[] actual = {3, 2, 1,};
+        Integer[] expected = {1, 2, 3};
+        Sorting.bogo(actual);
+        Assert.assertArrayEquals(expected, actual);
     }
 }

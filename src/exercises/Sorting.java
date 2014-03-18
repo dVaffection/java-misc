@@ -17,23 +17,47 @@ public class Sorting {
         }
     }
 
-    public static <T extends Comparable<? super T>> T[] shuffle(T[] array) {
+    public static <T extends Comparable<? super T>> void bogo(T[] array) {
+        do {
+            shuffle(array);
+        } while (!isSorted(array));
+    }
+
+    public static <T extends Comparable<? super T>> boolean isSorted(T[] array) {
+        if (array.length < 2) {
+            return true;
+        }
+
+        for (int i = 1; i < array.length; i++) {
+            if (array[i - 1].compareTo(array[i]) > 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static <T extends Comparable<? super T>> void shuffle(T[] array) {
+        if (array.length < 2) {
+            return;
+        }
+
         T[] copy = Arrays.copyOf(array, array.length);
         Random random = new Random();
 
-        int n = copy.length;
+        int n = array.length;
         while (n > 1) {
             int k = random.nextInt(n);
             n--;
 
-            T tmp = copy[n];
-            copy[n] = copy[k];
-            copy[k] = tmp;
-
-
+            T tmp = array[n];
+            array[n] = array[k];
+            array[k] = tmp;
         }
 
-        return copy;
+        if (Arrays.equals(copy, array)) {
+            shuffle(array);
+        }
     }
 
 }
