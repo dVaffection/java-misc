@@ -2,13 +2,13 @@ package exercises;
 
 public class Sorting {
 
-    public int[] bubble(int[] array) {
-        for (int run = 0, length = array.length; run < array.length; run++, length--) {
-            for (int i = 1; i < length; i++) {
-                if (array[i - 1] > array[i]) {
-                    int temp = array[i - 1];
-                    array[i - 1] = array[i];
-                    array[i] = temp;
+    public static <T extends Comparable<? super T>> T[] bubble(T[] array) {
+        for (int i = 0, j = array.length; i < array.length; i++, j--) {
+            for (int k = 1; k < j; k++) {
+                if (array[k - 1].compareTo(array[k]) > 0) {
+                    T tmp = array[k];
+                    array[k] = array[k - 1];
+                    array[k - 1] = tmp;
                 }
             }
         }
