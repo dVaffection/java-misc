@@ -3,8 +3,10 @@ package eerf.wrapper;
 abstract class BaseState implements State {
 
     protected Storage storage;
+    protected Worker worker;
 
-    BaseState(Storage storage) {
+    BaseState(Worker worker, Storage storage) {
+        this.worker = worker;
         this.storage = storage;
     }
 

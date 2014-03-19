@@ -1,8 +1,6 @@
 package eerf.wrapper;
 
 
-import com.google.gson.Gson;
-
 public class Worker {
 
     private Storage storage;
@@ -12,21 +10,23 @@ public class Worker {
         this.storage = storage;
 
         // initial state
-        state = new IdleState(this.storage);
+        changeState(new IdleState(this, this.storage));
     }
 
-    public String output() {
-        Gson gson = new Gson();
-        String out;
+    void changeState(State state) {
+        this.state = state;
+    }
 
-        try {
-            State.Status status = state.output();
-            out = gson.toJson(status);
-        } catch (StateException e) {
-            out = gson.toJson(e.getMessage());
-        }
+    public State.Status statusScan() throws StateException {
+        return state.output();
+    }
 
-        return out;
+    public void clear() throws StateException {
+        state.clear();
+    }
+
+    public void execTask(String id, String input) throws StateException {
+        state.exec(id, input);
     }
 
 }

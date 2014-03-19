@@ -2,8 +2,8 @@ package eerf.wrapper;
 
 class IdleState extends BaseState {
 
-    IdleState(Storage storage) {
-        super(storage);
+    IdleState(Worker worker, Storage storage) {
+        super(worker, storage);
     }
 
     @Override

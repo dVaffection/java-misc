@@ -2,8 +2,8 @@ package eerf.wrapper;
 
 class OutputState extends BaseState {
 
-    OutputState(Storage storage) {
-        super(storage);
+    OutputState(Worker worker, Storage storage) {
+        super(worker, storage);
     }
 
     @Override
@@ -15,7 +15,9 @@ class OutputState extends BaseState {
 
     @Override
     public void clear() throws StateException {
-        System.out.println("Clearing previous task output");
+        System.out.println("Previous task data cleaned, state changed to Idle");
+
+        worker.changeState(new IdleState(worker, storage));
     }
 
 }
