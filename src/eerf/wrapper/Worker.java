@@ -6,26 +6,26 @@ public class Worker {
     private Storage storage;
     private State state;
 
-    Worker(Storage storage) {
+    Worker(Storage storage, ExternalProgram externalProgram) {
         this.storage = storage;
 
         // initial state
-        changeState(new IdleState(this, this.storage));
+        changeState(new IdleState(this, this.storage, externalProgram));
     }
 
     void changeState(State state) {
         this.state = state;
     }
 
-    public State.Status statusScan() throws StateException {
+    public State.Status scan() throws StateException {
         return state.output();
     }
 
-    public void clear() throws StateException {
-        state.clear();
+    public void clean() throws StateException {
+        state.clean();
     }
 
-    public void execTask(String id, String input) throws StateException {
+    public void exec(String id, String input) throws StateException {
         state.exec(id, input);
     }
 

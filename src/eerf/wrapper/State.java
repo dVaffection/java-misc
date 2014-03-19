@@ -3,17 +3,16 @@ package eerf.wrapper;
 interface State {
 
     /**
-     * @return current state output
-     * @throws StateException if the current state does not support the operation
+     * @return current state output data
      */
-    Status output() throws StateException;
+    Status output();
 
     /**
-     * Clear previous task output data
+     * Clean previous task output data
      *
      * @throws StateException if the current state does not support the operation
      */
-    void clear() throws StateException;
+    void clean() throws StateException;
 
     /**
      * Execute a new task feeding it with the provided input data

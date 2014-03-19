@@ -2,12 +2,18 @@ package eerf.wrapper;
 
 class TerminatedState extends BaseState {
 
-    TerminatedState(Storage storage) {
-        super(storage);
+    TerminatedState(Worker worker, Storage storage, ExternalProgram externalProgram) {
+        super(worker, storage, externalProgram);
     }
 
     @Override
-    public Status output() throws StateException {
+    public Status output() {
         return new Status(StatusName.TERMINATED, storage.getId());
+    }
+
+    @Override
+    public void clean() {
+        externalProgram.cleanIO();
+        worker.changeState(new IdleState(worker, storage, externalProgram));
     }
 }

@@ -2,17 +2,19 @@ package eerf.wrapper;
 
 abstract class BaseState implements State {
 
-    protected Storage storage;
     protected Worker worker;
+    protected Storage storage;
+    protected ExternalProgram externalProgram;
 
-    BaseState(Worker worker, Storage storage) {
+    BaseState(Worker worker, Storage storage, ExternalProgram externalProgram) {
         this.worker = worker;
         this.storage = storage;
+        this.externalProgram = externalProgram;
     }
 
     @Override
-    public void clear() throws StateException {
-        throw new StateException("Current state does not support \"clear\" operation");
+    public void clean() throws StateException {
+        throw new StateException("Current state does not support \"clean\" operation");
     }
 
     @Override

@@ -2,22 +2,21 @@ package eerf.wrapper;
 
 class OutputState extends BaseState {
 
-    OutputState(Worker worker, Storage storage) {
-        super(worker, storage);
+    OutputState(Worker worker, Storage storage, ExternalProgram externalProgram) {
+        super(worker, storage, externalProgram);
     }
 
     @Override
-    public Status output() throws StateException {
-        // assumes that output data is taken from an external program execution result
+    public Status output() {
+        String output = externalProgram.getOutput();
 
-        return new Status(StatusName.OUTPUT, storage.getId(), "output data");
+        return new Status(StatusName.OUTPUT, storage.getId(), output);
     }
 
     @Override
-    public void clear() throws StateException {
-        System.out.println("Previous task data cleaned, state changed to Idle");
-
-        worker.changeState(new IdleState(worker, storage));
+    public void clean() {
+        externalProgram.cleanIO();
+        worker.changeState(new IdleState(worker, storage, externalProgram));
     }
 
 }
