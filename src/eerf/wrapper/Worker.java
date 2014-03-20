@@ -3,14 +3,12 @@ package eerf.wrapper;
 
 public class Worker {
 
-    private Storage storage;
     private State state;
 
     Worker(Storage storage, ExternalProgram externalProgram) {
-        this.storage = storage;
 
         // initial state
-        changeState(new IdleState(this, this.storage, externalProgram));
+        changeState(new IdleState(this, storage, externalProgram));
     }
 
     void changeState(State state) {
