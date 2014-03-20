@@ -1,10 +1,12 @@
 package eerf.wrapper;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import static org.mockito.Mockito.*;
 
-public class IdleStateTest {
+public class TerminatedStateTest {
 
     Worker          worker;
     ExternalProgram externalProgram;
@@ -17,31 +19,31 @@ public class IdleStateTest {
         storage = mock(Storage.class);
         externalProgram = mock(ExternalProgram.class);
 
-        state = new IdleState(worker, storage, externalProgram);
-    }
-
-    @Test(expected = StateException.class)
-    public void clean() throws StateException {
-        state.clean();
+        state = new TerminatedState(worker, storage, externalProgram);
     }
 
     @Test
-    public void testOutput() {
+    public void output() {
         when(storage.getId()).thenReturn("123");
         State.Status actualStatus = state.output();
 
-        Assert.assertSame(State.StatusName.IDLE, actualStatus.getName());
+        Assert.assertSame(State.StatusName.TERMINATED, actualStatus.getName());
         Assert.assertSame("123", actualStatus.getId());
         Assert.assertNull(actualStatus.getOutput());
     }
 
     @Test
-    public void testExec() throws StateException {
-        state.exec("123", "input");
+    public void clean() throws StateException {
+        state.clean();
 
-        verify(storage, times(1)).setId("123");
-        verify(externalProgram, times(1)).start("input");
-        State busyState = new BusyState(worker, storage, externalProgram);
+        verify(externalProgram, times(1)).cleanIO();
+
+        State busyState = new IdleState(worker, storage, externalProgram);
         verify(worker, times(1)).changeState(eq(busyState));
+    }
+
+    @Test(expected = StateException.class)
+    public void exec() throws StateException {
+        state.exec("does-not-matter", "does-not-matter");
     }
 }
