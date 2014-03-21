@@ -28,12 +28,8 @@ public class WorkerTest {
         when(externalProgram.isWorking()).thenReturn(true);
 
         State.Status status = null;
-        try {
-            status = worker.scan();
-            Assert.assertSame(State.StatusName.IDLE, status.getName());
-        } catch (StateException e) {
-            Assert.fail(e.getMessage());
-        }
+        status = worker.scan();
+        Assert.assertSame(State.StatusName.IDLE, status.getName());
 
         try {
             worker.clean();
@@ -58,12 +54,8 @@ public class WorkerTest {
         when(externalProgram.isWorking()).thenReturn(true);
 
         State.Status status = null;
-        try {
-            status = worker.scan();
-            Assert.assertSame(State.StatusName.BUSY, status.getName());
-        } catch (StateException e) {
-            Assert.fail(e.getMessage());
-        }
+        status = worker.scan();
+        Assert.assertSame(State.StatusName.BUSY, status.getName());
 
         try {
             worker.clean();
@@ -79,12 +71,8 @@ public class WorkerTest {
 
 
         when(externalProgram.wasTerminated()).thenReturn(true);
-        try {
-            status = worker.scan();
-            Assert.assertSame(State.StatusName.TERMINATED, status.getName());
-        } catch (StateException e) {
-            Assert.fail(e.getMessage());
-        }
+        status = worker.scan();
+        Assert.assertSame(State.StatusName.TERMINATED, status.getName());
     }
 
     @Test
@@ -96,12 +84,8 @@ public class WorkerTest {
         when(externalProgram.hasOutput()).thenReturn(true);
 
         State.Status status = null;
-        try {
-            status = worker.scan();
-            Assert.assertSame(State.StatusName.OUTPUT, status.getName());
-        } catch (StateException e) {
-            Assert.fail(e.getMessage());
-        }
+        status = worker.scan();
+        Assert.assertSame(State.StatusName.OUTPUT, status.getName());
     }
 
     @Test
@@ -109,12 +93,8 @@ public class WorkerTest {
         worker.changeState(new OutputState(worker, storage, externalProgram));
 
         State.Status status = null;
-        try {
-            status = worker.scan();
-            Assert.assertSame(State.StatusName.OUTPUT, status.getName());
-        } catch (StateException e) {
-            Assert.fail(e.getMessage());
-        }
+        status = worker.scan();
+        Assert.assertSame(State.StatusName.OUTPUT, status.getName());
 
         try {
             worker.exec("does-not-matter", "does-not-matter");
@@ -128,11 +108,7 @@ public class WorkerTest {
             Assert.fail(e.getMessage());
         }
 
-        try {
-            status = worker.scan();
-            Assert.assertSame(State.StatusName.IDLE, status.getName());
-        } catch (StateException e) {
-            Assert.fail(e.getMessage());
-        }
+        status = worker.scan();
+        Assert.assertSame(State.StatusName.IDLE, status.getName());
     }
 }

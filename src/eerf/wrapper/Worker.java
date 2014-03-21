@@ -15,7 +15,7 @@ public class Worker {
         this.state = state;
     }
 
-    public State.Status scan() throws StateException {
+    public State.Status scan() {
         return state.output();
     }
 
