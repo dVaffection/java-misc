@@ -32,6 +32,14 @@ public class WorkersManager {
         }
     }
 
+    /**
+     * Add new task
+     *
+     * @param id    of a task
+     * @param input data
+     * @throws WorkersManagerException if task can not be added (no vacant Worker to accept new task)
+     * @throws RuntimeException        if found Worker rejects to accept new task
+     */
     public void addTask(String id, String input) throws WorkersManagerException {
         Worker worker = findIdleWorker();
 
@@ -62,6 +70,56 @@ public class WorkersManager {
         }
 
         return null;
+    }
+
+    /**
+     * Return task status
+     *
+     * @param id of a task
+     * @return State.Status
+     * @throws WorkersManagerException if task was not found
+     */
+    public State.Status getTaskStatus(String id) throws WorkersManagerException {
+        Set<String> names = workers.keySet();
+
+        for (String name : names) {
+            Worker worker = workers.get(name);
+            State.Status status = worker.scan();
+
+            if (status.getId() == id) {
+                return status;
+            }
+        }
+
+        String message = String.format("Task with id \"%s\" was not found", id);
+        throw new WorkersManagerException(message);
+    }
+
+    /**
+     * Remove task from Worker if task state allows to do this
+     *
+     * @param id of a task
+     * @throws WorkersManagerException if task was not found or if task state doesn't allow to be cleaned
+     */
+    public void removeTask(String id) throws WorkersManagerException {
+        Set<String> names = workers.keySet();
+
+        for (String name : names) {
+            Worker worker = workers.get(name);
+            State.Status status = worker.scan();
+
+            if (status.getId() == id) {
+                try {
+                    worker.clean();
+                } catch (StateException e) {
+                    throw new WorkersManagerException(e.getMessage());
+                }
+                return;
+            }
+        }
+
+        String message = String.format("Task with id \"%s\" was not found", id);
+        throw new WorkersManagerException(message);
     }
 
 }
