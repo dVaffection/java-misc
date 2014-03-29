@@ -1,11 +1,11 @@
 package vendingmachine;
 
-public enum Coin implements Comparable<Coin> {
+public enum Coin {
 
     PENNY(0.01f),
     NICKEL(0.05f),
     DIME(0.10f),
-    QUARTER(0.20f),
+    QUARTER(0.25f),
     HALF(0.50f),
     LOONIE(1),
     TOONIE(2);
@@ -19,7 +19,5 @@ public enum Coin implements Comparable<Coin> {
     public float getValue() {
         return value;
     }
-
-
 
 }

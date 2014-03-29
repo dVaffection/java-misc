@@ -43,7 +43,7 @@ class Till {
     /**
      * Break given amount into coins
      *
-     * @param amount
+     * @param amount to break
      * @return coins
      */
     public Collection<Coin> breakIntoCoins(float amount) {
@@ -54,14 +54,18 @@ class Till {
         Collection<Coin> coins = new ArrayList<>();
         List<Coin> coinTypes = Arrays.asList(Coin.values());
 
+        // values in Coin enum are sorted according to the ordinal position
         Collections.sort(coinTypes);
         Collections.reverse(coinTypes);
 
+        float diff;
         while (amount > 0) {
             for (Coin coin : coinTypes) {
-                if (0 == amount % coin.getValue()) {
+                // for some reason Math.round has no decimal points
+                diff = Math.round((amount - coin.getValue()) * 100.0f) / 100.0f;
+                if (diff >= 0) {
                     coins.add(coin);
-                    amount = -coin.getValue();
+                    amount = diff;
                     break;
                 }
             }
