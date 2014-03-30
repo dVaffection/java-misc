@@ -45,4 +45,36 @@ public class TillTest {
         actual = till.breakIntoCoins(3.91f);
         assertThat(actual, CoreMatchers.is(expected));
     }
+
+    @Test
+    public void change() {
+        Collection<Coin> actual, expected, coins;
+
+        coins = Arrays.asList(Coin.LOONIE);
+        try {
+            till.charge(coins, 1.10f);
+            fail();
+        } catch (TillException e) {
+
+        }
+
+
+        try {
+            coins = Arrays.asList(Coin.LOONIE);
+            expected = Arrays.asList(Coin.HALF);
+            actual = till.charge(coins, 0.50f);
+            assertThat(actual, CoreMatchers.is(expected));
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+
+        try {
+            coins = Arrays.asList(Coin.TOONIE);
+            expected = Arrays.asList(Coin.HALF, Coin.DIME, Coin.DIME, Coin.PENNY, Coin.PENNY, Coin.PENNY);
+            actual = till.charge(coins, 1.27f);
+            assertThat(actual, CoreMatchers.is(expected));
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
 }

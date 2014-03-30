@@ -1,18 +1,29 @@
 package vendingmachine;
 
-import java.util.Collection;
+import java.util.*;
 
 public class VendingMachine {
 
-    Storage storage = new Storage();
-    Till    till    = new Till();
+    private State state;
 
-    public void fill(Collection<Product> products) {
-        storage.addProducts(products);
+    public VendingMachine() {
+        changeState(new IdleState(this, new Storage(), new Till()));
     }
 
-    public Product buy(String name, Collection<Coin> coins) {
-        return null;
+    void changeState(State state) {
+        this.state = state;
+    }
+
+    public void fill(Collection<Product> products) {
+//        storage.addProducts(products);
+    }
+
+    public void credit(Collection<Coin> coins) {
+
+    }
+
+    public void choose(String name) {
+
     }
 
 }

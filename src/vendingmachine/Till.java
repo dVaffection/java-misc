@@ -13,12 +13,12 @@ class Till {
      * @throws TillException if not enough coins given
      */
     public Collection<Coin> charge(Collection<Coin> coins, float price) throws TillException {
-        if (price < 1) {
+        if (price <= 0) {
             throw new IllegalArgumentException("Price must be greater than 0");
         }
 
         float amount = 0f;
-        float change = 0f;
+        float change;
         Collection<Coin> changeCoins;
 
         for (Coin coin : coins) {
@@ -26,16 +26,15 @@ class Till {
         }
 
         if (amount < price) {
-            throw new TillException("Not enough amount given");
+            throw new TillException("Not enough credit");
         }
 
-        change = amount - price;
+        change = round(amount - price);
         if (change > 0) {
             changeCoins = breakIntoCoins(change);
         } else {
             changeCoins = new ArrayList<>();
         }
-
 
         return changeCoins;
     }
@@ -61,8 +60,7 @@ class Till {
         float diff;
         while (amount > 0) {
             for (Coin coin : coinTypes) {
-                // for some reason Math.round has no decimal points
-                diff = Math.round((amount - coin.getValue()) * 100.0f) / 100.0f;
+                diff = round(amount - coin.getValue());
                 if (diff >= 0) {
                     coins.add(coin);
                     amount = diff;
@@ -72,6 +70,13 @@ class Till {
         }
 
         return coins;
+    }
+
+    /**
+     * For some reason Math.round has no decimal points
+     */
+    private float round(float number) {
+        return Math.round(number * 100.0f) / 100.0f;
     }
 
 }
