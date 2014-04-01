@@ -17,7 +17,7 @@ public class IdleState implements State {
     }
 
     @Override
-    public void fill(Collection<Product> products) throws StateException {
+    public void fillWithProducts(Collection<Product> products) throws StateException {
         storage.addProducts(products);
     }
 
@@ -28,7 +28,7 @@ public class IdleState implements State {
     }
 
     @Override
-    public void chooseProduct(String name) throws StorageException, TillException, StateException {
+    public void chooseProduct(String name) throws TillException, StateException {
         String message = "Idle state does not support \"chooseProduct\" method";
         throw new StateException(message);
     }

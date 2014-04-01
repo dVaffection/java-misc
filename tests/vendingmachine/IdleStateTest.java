@@ -24,10 +24,10 @@ public class IdleStateTest {
     }
 
     @Test
-    public void fill() throws StateException {
+    public void fillWithProducts() throws StateException {
         Collection<Product> products = new ArrayList<Product>();
 
-        state.fill(products);
+        state.fillWithProducts(products);
         verify(storage, times(1)).addProducts(eq(products));
     }
 

@@ -4,14 +4,14 @@ import java.util.*;
 
 interface State {
 
-    public void fill(Collection<Product> products) throws StateException;
+    void fillWithProducts(Collection<Product> products) throws StateException;
 
-    public void credit(Collection<Coin> coins) throws StateException;
+    void credit(Collection<Coin> coins) throws StateException;
 
-    public void chooseProduct(String name) throws StorageException, TillException, StateException;
+    void chooseProduct(String name) throws TillException, StateException;
 
-    public Product getProduct() throws StateException;
+    Product getProduct() throws StateException;
 
-    public Collection<Coin> getChange() throws StateException;
+    Collection<Coin> getChange() throws StateException;
 
 }

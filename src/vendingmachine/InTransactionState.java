@@ -17,8 +17,8 @@ public class InTransactionState implements State {
     }
 
     @Override
-    public void fill(Collection<Product> products) throws StateException {
-        String message = "InTransaction state does not support \"fill\" method";
+    public void fillWithProducts(Collection<Product> products) throws StateException {
+        String message = "InTransaction state does not support \"fillWithProducts\" method";
         throw new StateException(message);
     }
 
@@ -28,16 +28,24 @@ public class InTransactionState implements State {
     }
 
     @Override
-    public void chooseProduct(String name) throws StorageException, TillException, StateException {
-        Product product = storage.getProduct(name);
-        Collection<Coin> change = till.charge(credit, product.getPrice());
-
-        // once product found and paid remove it from storage
-        storage.removeProduct(name);
-
+    public void chooseProduct(String name) throws TillException, StateException {
+        // we'll change state to idle regardless any valid outcome
         IdleState state = new IdleState(vendingMachine, storage, till);
-        state.setProduct(product);
-        state.setChange(change);
+
+        try {
+            Product product = storage.getProduct(name);
+            Collection<Coin> change = till.charge(credit, product.getPrice());
+
+            state.setProduct(product);
+            state.setChange(change);
+
+            // once product found and paid remove it from storage
+            storage.removeProduct(name);
+        } catch (StorageException e) {
+            // product was not found in stock, return user his money
+            state.setChange(credit);
+        }
+
         vendingMachine.changeState(state);
     }
 

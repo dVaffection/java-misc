@@ -33,12 +33,16 @@ public class InTransactionStateTest {
         verify(credit, times(1)).addAll(eq(coins));
     }
 
-    @Test(expected = StorageException.class)
+    @Test
     public void productDoesNotExist() throws TillException, StateException, StorageException {
         String name = "non-existing-product-name";
 
         when(storage.getProduct(name)).thenThrow(new StorageException("Product is out of stock"));
         state.chooseProduct(name);
+
+        IdleState newState = new IdleState(vendingMachine, storage, till);
+        newState.setChange(credit);
+        verify(vendingMachine, times(1)).changeState(eq(newState));
     }
 
 
