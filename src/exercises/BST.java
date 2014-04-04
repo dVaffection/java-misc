@@ -39,23 +39,40 @@ public class BST<E extends Comparable<E>> {
     }
 
     public boolean delete(E e) {
-//        List<E> path = new LinkedList<>();
-//
-//        traverseInOrder(root, path);
-
-        if (root == null) {
-            return false;
-        }
-
         return delete(e, root, null);
     }
 
     private boolean delete(E e, Node cur, Node prev) {
         if (cur != null) {
             if (cur.value == e) {
+                if (cur.left == null && cur.right == null) {
+                    // node has no children (leaf), simply delete it
+                    if (prev.left == cur) {
+                        prev.left = null;
+                    } else if (prev.right == null) {
+                        prev.right = null;
+                    } else {
+                        throw new RuntimeException("Node " + cur.value + " was not found at its predecessor " + prev.value);
+                    }
+                } else if (cur.left != null && cur.right == null) {
+                    // current node becomes its left child
+                    cur = cur.left;
+                } else if (cur.right != null && cur.left == null) {
+                    // current node becomes its right child
+                    cur = cur.right;
+                } else {
+                    // current node has both left and right children
+                    throw new RuntimeException("Can not delete node with both children");
+                }
 
+                return true;
             } else {
-                return delete(e, cur.left, cur);
+                boolean is;
+                is = delete(e, cur.left, cur);
+                if (!is) {
+                    is = delete(e, cur.right, cur);
+                }
+                return is;
             }
         }
 

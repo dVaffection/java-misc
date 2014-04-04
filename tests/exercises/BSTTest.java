@@ -38,6 +38,18 @@ public class BSTTest {
     }
 
     @Test
+    public void delete() {
+        List<Integer> values = getValues();
+
+        for (Integer value : values) {
+            bst.add(value);
+        }
+
+        bst.delete(1);
+        bst.dump();
+    }
+
+    @Test
     public void traversePreOrder() {
         List<Integer> values = getValues();
 
@@ -49,7 +61,7 @@ public class BSTTest {
         List<Integer> path = bst.traversePreOrder();
         Assert.assertEquals(expected, path);
 
-        System.out.println("Pre-order: " + path);
+//        System.out.println("Pre-order: " + path);
     }
 
     @Test
@@ -64,7 +76,7 @@ public class BSTTest {
         List<Integer> path = bst.traverseInOrder();
         Assert.assertEquals(expected, path);
 
-        System.out.println("In-order: " + path);
+//        System.out.println("In-order: " + path);
     }
 
     @Test
@@ -79,6 +91,6 @@ public class BSTTest {
         List<Integer> path = bst.traversePostOrder();
         Assert.assertEquals(expected, path);
 
-        System.out.println("Post-order: " + path);
+//        System.out.println("Post-order: " + path);
     }
 }
