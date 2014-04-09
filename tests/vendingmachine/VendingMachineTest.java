@@ -24,7 +24,7 @@ public class VendingMachineTest {
         assertNull(vendingMachine.getChange());
     }
 
-    @Test(expected = StateException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void creditIsRequiredFirst() throws TillException, StateException {
         vendingMachine.chooseProduct("Coca Cola");
     }

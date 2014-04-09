@@ -18,8 +18,7 @@ public class InTransactionState implements State {
 
     @Override
     public void fillWithProducts(Collection<Product> products) throws StateException {
-        String message = "InTransaction state does not support \"fillWithProducts\" method";
-        throw new StateException(message);
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -51,14 +50,12 @@ public class InTransactionState implements State {
 
     @Override
     public Product getProduct() throws StateException {
-        String message = "InTransaction state does not support \"getProduct\" method";
-        throw new StateException(message);
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Collection<Coin> getChange() throws StateException {
-        String message = "InTransaction state does not support \"getChange\" method";
-        throw new StateException(message);
+        throw new UnsupportedOperationException();
     }
 
     @Override

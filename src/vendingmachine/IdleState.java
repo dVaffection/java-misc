@@ -29,8 +29,7 @@ public class IdleState implements State {
 
     @Override
     public void chooseProduct(String name) throws TillException, StateException {
-        String message = "Idle state does not support \"chooseProduct\" method";
-        throw new StateException(message);
+        throw new UnsupportedOperationException();
     }
 
     @Override

@@ -31,7 +31,7 @@ public class IdleStateTest {
         verify(storage, times(1)).addProducts(eq(products));
     }
 
-    @Test(expected = StateException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void chooseProduct() throws TillException, StateException, StorageException {
         state.chooseProduct("does not matter");
     }
