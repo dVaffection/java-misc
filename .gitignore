@@ -8,3 +8,8 @@ out/
 .idea
 *.iml
 META-INF/
+
+
+# gradle files
+.gradle
+build/

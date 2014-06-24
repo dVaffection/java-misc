@@ -47,6 +47,7 @@ public class InTransactionStateTest {
 
 
     @Test(expected = TillException.class)
+    @SuppressWarnings("unchecked")
     public void notEnoughCredit() throws TillException, StateException, StorageException {
         Product product = new Product("Sprite", 1.75f);
 
@@ -56,6 +57,7 @@ public class InTransactionStateTest {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     public void productIsBought() throws StorageException, TillException, StateException {
         Product product = new Product("Sprite", 1.75f);
         Collection<Coin> change = Collections.emptyList();
