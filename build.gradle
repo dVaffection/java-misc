@@ -10,8 +10,8 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-    compile 'org.mockito:mockito-all:1.8.4'
+    testCompile 'junit:junit:4.+'
+    testCompile 'org.mockito:mockito-all:1.+'
 }
 
 task hello << {
@@ -19,4 +19,11 @@ task hello << {
 
     println "Original: " + out;
     println 'Upper-cased: ' + out.toUpperCase();
+}
+
+task printDirs << {
+    File currentDir = new File('.');
+    print currentDir.listFiles().each {
+        println "{$it}"
+    }
 }
