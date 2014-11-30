@@ -1,5 +1,9 @@
 package exercises;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * http://java67.blogspot.ca/2013/01/10-programming-questions-and-exercises.html
  */
@@ -81,6 +85,16 @@ public class Numbers {
                 return true;
             }
         }
+    }
+
+    public int findMissingNumber(int[] numbers) {
+        List<Integer> master = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+
+        for (int i = 0; i < numbers.length; i++) {
+            master.remove(new Integer(numbers[i]));
+        }
+
+        return master.get(0);
     }
 
 }

@@ -1,6 +1,6 @@
 package exercises;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,4 +49,13 @@ public class NumbersTest {
         Assert.assertFalse(numbers.isBinary(12));
         Assert.assertFalse(numbers.isBinary(7));
     }
+
+    @Test
+    public void findMissingNumber() {
+        int[] param = {3, 2, 4, 5};
+        int actual = numbers.findMissingNumber(param);
+        int expected = 1;
+        Assert.assertSame(actual, expected);
+    }
+
 }
