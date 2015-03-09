@@ -26,7 +26,21 @@ public class StackMachine {
         return value;
     }
 
-    private class Node {
+    public Object peek() {
+        Object value = null;
+
+        if (pointer != null) {
+            value = pointer.value;
+        }
+
+        return value;
+    }
+
+    public boolean empty() {
+        return pointer == null;
+    }
+
+    private static class Node {
 
         Object value;
         Node   next;
