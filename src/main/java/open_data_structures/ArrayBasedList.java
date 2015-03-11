@@ -39,7 +39,9 @@ public class ArrayBasedList<T> {
         a[i] = o;
     }
 
-    public void remove(int i) {
+    public T remove(int i) {
+        T o = a[i];
+
         for (int j = i; j < a.length - 1; j++) {
             a[j] = a[j + 1];
         }
@@ -50,6 +52,8 @@ public class ArrayBasedList<T> {
         if (n <= a.length / 3) {
             resize();
         }
+
+        return o;
     }
 
     @SuppressWarnings("unchecked")
@@ -65,6 +69,10 @@ public class ArrayBasedList<T> {
 
     int getArraySize() {
         return a.length;
+    }
+
+    int getElementsNumber() {
+        return n;
     }
 
     void printArray() {
